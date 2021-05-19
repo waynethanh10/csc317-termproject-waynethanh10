@@ -1,0 +1,11 @@
+Install mysql server and phpmyadmin from https://www.apachefriends.org/download.html or you can google XAMPP.
+XAMPP is opensource Mac OS version of apache, PHP, MYSQL server.
+
+
+
+From phpmyadmin import the "project.sql" file this will be create the required tables in database.
+
+Name of database is "project"
+
+
+Do not forget to edit the application\app.js to set user name and password for database
