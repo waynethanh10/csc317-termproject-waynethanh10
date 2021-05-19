@@ -1,0 +1,20 @@
+<nav id = "nav-bar" class="navbar navbar-default">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav">
+            <li ><a href="#">iPA</a></li>            
+            <li><form></form></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            {{#if session}}
+            <li ><a href="/postimage">Post</a></li>
+            {{/if}}
+            {{#if session}}
+            <li ><a href="/logout">Logout</a></li>
+            {{else}}
+            <li ><a href="/login">Login</a></li>
+            <li ><a href="/registration">Register</a></li>            
+            {{/if}}
+        </ul>
+    </ul>
+    </div>
+</nav>
