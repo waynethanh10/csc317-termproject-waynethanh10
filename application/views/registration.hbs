@@ -1,0 +1,58 @@
+{{#if messages.error}}
+<div class="alert alert-danger" role="alert">{{messages.error}}</div>
+{{/if}}
+<header class="box-shadow-light">
+    <h1>Create account</h1>
+</header>
+<form onsubmit="" class="form-horizontal" method="post">
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="email">Email</label>
+            <div class="col-sm-10">
+                <input class="form-control" type="email" id="email" name="email" required />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="username">Username</label>
+            <div class="col-sm-10">
+                <input class="form-control" type="text" id="username" name="username" required />
+            </div>
+        </div>
+        <div class="form-group">
+        <label class="col-sm-2 control-label" for="pass">Password</label>
+            <div class="col-sm-10">
+                <input class="form-control"  type="password" id="pass" name="pass" />
+            </div>
+        </div>
+        <div class="form-group">
+        <label class="col-sm-2 control-label" for="passValidation">Confirm Password</label>
+            <div class="col-sm-10">                
+                <input  class="form-control" type="password" id="passValidation" name="passValidation" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+            <label>
+                <input name="year_13" value="1" type="checkbox" /> I accept I am 13 years old and older
+            </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+            <label>
+        <input name="accept" value="1"  type="checkbox"> I accept <a href="url">Terms of Service</a> and <a href="url1">Privacy Rules</a>
+        
+            </label>
+        </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+            <button class="btn btn-success" type="submit">Create account</button>
+            <button class="btn btn-danger" type="reset"> Cancel</button>
+            <div class="col-sm-offset-2 col-sm-10">
+        </div>
+    </form>
+
+
+<div>
+    <h4 id="message">Create an account</h4>
+</div>
