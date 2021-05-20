@@ -8,7 +8,20 @@
 <body>
   <h1>Express</h1>
   <h2>Hello world, i am {{name}}</h2>
-
+  <form method="post">
+  	<input type="text" name="term" />
+  	<input type="submit" name="" />
+  </form>
+  {{#if posts}}
+  	{{#each posts}}
+  		<div>
+  			<a href="/post?id={{id}}">
+  				<img style="max-width: 200px;max-height: 200px" src="/public/images/{{img}}" />
+  				<p class="text-primary">{{title}}</p>
+  			</a>
+  		</div>
+  	{{/each}}
+  {{/if}}
 </body>
 
 </html>
