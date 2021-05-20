@@ -16,8 +16,14 @@ const connection = mysql.createConnection({
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  //next(new Error('test'));
-  res.render('index', {title:"Photo App",session:req.session.users});
+  connection.query(
+	  'SELECT * FROM `posts` WHERE 1=1',
+	  function(err, results, fields) {
+	    console.log(results); // results contains rows returned by server
+	    res.render('index', {title:"Photo App",session:req.session.users,posts:results});
+	  }
+	);	
+  //res.render('index', {title:"Photo App",session:req.session.users});
 });
 
 router.post('/', function(req, res, next) {
