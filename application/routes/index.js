@@ -20,6 +20,23 @@ router.get('/', function(req, res, next) {
   res.render('index', {title:"Photo App",session:req.session.users});
 });
 
+router.post('/', function(req, res, next) {
+  //next(new Error('test'));
+  let term=req.body.term;
+  console.log(term)
+
+connection.query(
+	  'SELECT * FROM `posts` WHERE `title` LIKE "%'+term+'%" || `description` LIKE "%'+term+'%"',
+	  function(err, results, fields) {
+	    console.log(results); // results contains rows returned by server
+	    res.render('index', {title:"Photo App",session:req.session.users,posts:results});
+	  }
+	);	
+
+
+  
+});
+
 router.get('/login',(req, res, next) => {
   res.render("login", {title:"Log in"});
 });
@@ -155,5 +172,50 @@ router.post('/postimage',(req, res, next) => {
 	//res.end();
   	//res.render("postimage", {title:"Create a Post",file:req.files.img.name,session:req.session.users});
 });
+
+router.get('/post',(req, res, next) => {
+	let id=req.query.id
+	connection.query(
+	  'SELECT posts.*, comments.text FROM `posts` LEFT OUTER JOIN `comments` ON posts.id=comments.post_id WHERE posts.id='+id,
+	  function(err, results, fields) {
+	    console.log(err); // results contains rows returned by server
+	    connection.query('SELECT * FROM comments WHERE post_id='+id,function(err,results2,fields){
+	    	res.render("post", {title:"Post",post:results[0],comments:results2});	
+	    });
+	  }
+	);	
+  
+});
+
+router.post('/post',(req, res, next) => {
+	let id=req.body.id
+	let comment=req.body.comment
+	connection.query(
+	  `INSERT INTO \`comments\` (\`post_id\`,\`text\`,\`created\`) VALUES(${id},"${comment}",NOW())`,
+	  function(err, results, fields) {
+	  	console.log(err)
+	    if(!err){
+	    	req.session.users=results[0];
+	    			res.writeHead(301,
+  						{Location: '/post?id='+id}
+						);
+					res.end();
+	    }else{
+	    	connection.query(
+	  'SELECT posts.*, comments.text FROM `posts` LEFT OUTER JOIN `comments` ON posts.id=comments.post_id WHERE posts.id='+id,
+	  function(err, results, fields) {
+	    console.log(err); // results contains rows returned by server
+	    connection.query('SELECT * FROM comments WHERE post_id='+id,function(err,results2,fields){
+	    	res.render("post", {title:"Post",post:results[0],comments:results2});	
+	    });
+	    
+	  }
+	);	
+	    }
+	  }
+	);	
+  
+});
+
 
 module.exports = router;
